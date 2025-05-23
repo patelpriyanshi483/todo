@@ -21,14 +21,15 @@ def aboutus_view(request):
 
 def service_view(request):
     servicesData=Service.objects.all().order_by('service_title')
-    paginator=Paginator(servicesData,2)
-    page_number=request.GET.get('page')
-    ServiceDataFinal=paginator.get_page(page_number)
-    totalpage=ServiceDataFinal.paginator.num_pages
     if request.method=="GET":
         st=request.GET.get('servicename')
         if st!=None:
             servicesData=Service.objects.filter(service_title__icontains=st)
+    paginator=Paginator(servicesData,2)
+    page_number=request.GET.get('page')
+    ServiceDataFinal=paginator.get_page(page_number)
+    totalpage=ServiceDataFinal.paginator.num_pages
+   
     data={
         'servicesData':ServiceDataFinal,
         'lastpage':totalpage,
