@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from contact.models import Contact
 from .forms import TaskForm
 from tasks.models import Task
+from django.utils.timezone import now
 
 def home_view(request):
     newsData=News.objects.all()
@@ -46,8 +47,9 @@ def tasks_view(request):
             form.save()
             return redirect('tasks')
 
-    tasks = Task.objects.all().order_by('duration')
-    return render(request, 'tasks.html', {'form': form, 'tasks': tasks})
+    tasks = Task.objects.all().order_by('estimated_time')
+    tasks = Task.objects.all().order_by('deadline')
+    return render(request, 'tasks.html', {'form': form, 'tasks': tasks,'now': now()})
 
 
 def edit_task(request, pk):
