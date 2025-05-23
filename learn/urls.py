@@ -26,6 +26,8 @@ urlpatterns = [
     path('aboutus/', views.aboutus_view, name='aboutus'),
     path('service/', views.service_view, name='service'),
     path('tasks/', views.tasks_view, name='tasks'),
+    path('edit-task/<int:pk>/', views.edit_task, name='edit_task'),
+    path('delete-task/<int:pk>/', views.delete_task, name='delete_task'),
     path('savedata/', views.savedata, name='savedata'),
     path('userform/', views.userform),
     path('calculator/', views.calculator),

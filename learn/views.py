@@ -1,11 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect,get_object_or_404
 from .forms import usersForm
 from service.models import Service
 from news.models import News
 from django.core.paginator import Paginator
 from contact.models import Contact
+from .forms import TaskForm
+from tasks.models import Task
 
 def home_view(request):
     newsData=News.objects.all()
@@ -37,7 +39,33 @@ def service_view(request):
     return render(request, 'service.html',data)
 
 def tasks_view(request):
-    return render(request, 'tasks.html')
+    form = TaskForm()
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+
+    tasks = Task.objects.all().order_by('duration')
+    return render(request, 'tasks.html', {'form': form, 'tasks': tasks})
+
+
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'edit_task.html', {'form': form, 'task': task})
+
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('tasks')
 
 def userform(request):
    
