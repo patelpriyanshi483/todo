@@ -1,0 +1,44 @@
+// static/scss/style.scss
+
+$primary-color: #007bff;
+$success-color: #28a745;
+$text-color: #333;
+$background: #f9f9f9;
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: $background;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: $primary-color;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: $success-color;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+
+    &:hover {
+        background-color: darken($success-color, 10%);
+    }
+}

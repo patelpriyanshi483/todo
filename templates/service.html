@@ -1,0 +1,121 @@
+{% load static %}
+{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Services - Todo App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+   
+
+    <main>
+        <div class="col-12">
+            <form method ="get">
+                <input type="text" name="servicename" value=""/>
+                <input type="submit" name="Search"/>
+            </form>
+        </div>
+        
+        
+<section>
+    <h3>Our Services</h3>
+    <div class="row">
+        {% for n in servicesData %}
+        <div class="col-lg-4 col-md-6">
+            <div class="single-feature mb-30">
+                <div class="title">
+                    <span class="{{ n.service_icon }}"></span>
+                    <h4><a href="#">{{ n.service_title }}</a></h4>
+                </div>
+                <p>{{ n.service_des|safe }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<nav aria-label="...">
+  <ul class="pagination">
+    {% if servicesData.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="/service/?page=1" tabindex="-1">First</a>
+    </li>
+     <li class="page-item ">
+      <a class="page-link" href="/service/?page={{servicesData.previous_page_number}}" tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+
+    {%for n in totalpagelist%}
+    <li class="page-item"><a class="page-link" href="/service/?page={{n}}">{{n}}</a></li>
+    {%endfor%}
+    {% if servicesData.has_next %}
+    
+     <li class="page-item">
+      <a class="page-link" href="/service/?page={{servicesData.next_page_number}}">Next</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="/service/?page={{lastpage}}">Last</a>
+    </li>
+    {%endif%}
+  </ul>
+</nav>
+
+
+
+<style>
+    section {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: #f5f7fa;
+    }
+    h3 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+        color: #333;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    .col-lg-4, .col-md-6 {
+        flex: 0 1 300px;
+    }
+    .single-feature {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    .single-feature:hover {
+        transform: translateY(-5px);
+    }
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+    .title span {
+        font-size: 28px;
+        color: #007bff;
+    }
+    .title h4 {
+        font-size: 20px;
+        margin: 0;
+        color: #333;
+    }
+    .single-feature p {
+        color: #555;
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: left;
+    }
+</style>
+
+{% include "footer.html" %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <main>
+        <section>
+            <h2>Organize Your Day</h2>
+            <p>Todo App helps you manage tasks, meet deadlines, and stay productive.</p>
+            <a href="{% url 'tasks' %}" class="btn">Get Started</a>
+        </section>
+
+        <section>
+            <h2>Why Use Our Todo App?</h2>
+            <ul>
+                <li>Simple and clean interface</li>
+                <li>Easy task creation and tracking</li>
+                <li>Reminders and deadline alerts</li>
+            </ul>
+        </section>
+         <section>
+            <h3>Imp Points</h3>
+            <div class="row">
+             {%for n in newsData%}
+              <div class="col-lg-4 col-md-6">
+                <div class="single-feature mb-30">
+                  <div class="title d-flex flex-row pb-20">
+                    
+                    <h4><a fref="#">{{n.news_title}}</a></h4>
+                  </div>
+                  <p>
+                    {{n.news_desc | safe}}
+                    <div class="col-12">
+              <img src="/media/{{n.news_image}}"/>
+             </div>
+                  </p>
+                </div>
+              </div>
+             {%endfor%}
+             
+        </section>
+        
+    </main>
+    {% endblock %}
+   

@@ -1,0 +1,25 @@
+{% load static %}
+{% include "header.html" %}
+
+<main class="container mt-5 mb-5">
+    <h2 class="mb-4 text-center">Contact Us</h2>
+    <form method="post" action= "{% url 'savedata' %}" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_contact_name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="id_contact_name" name="contact_name" maxlength="100" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_contact_email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="id_contact_email" name="contact_email" maxlength="100" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_contact_number" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="id_contact_number" name="contact_number" maxlength="10" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {{n}}
+    </form>
+</main>
+
+{% include "footer.html" %}
