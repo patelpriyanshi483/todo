@@ -28,7 +28,7 @@ def service_view(request):
     if request.method=="GET":
         st=request.GET.get('servicename')
         if st!=None:
-             servicesData=Service.objects.filter(service_title__icontains=st)
+            servicesData=Service.objects.filter(service_title__icontains=st)
     data={
         'servicesData':ServiceDataFinal,
         'lastpage':totalpage,
