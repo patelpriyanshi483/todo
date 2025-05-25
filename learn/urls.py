@@ -32,7 +32,9 @@ urlpatterns = [
     path('userform/', views.userform),
     path('calculator/', views.calculator),
     path('thankyou/', views.thankyou_view, name='thankyou'),
-    path('contact/', views.contact_view, name='contact')
+    path('contact/', views.contact_view, name='contact'),
+    path('tasks/complete/<int:task_id>/', views.mark_completed, name='mark_completed')
+
    ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
